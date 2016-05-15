@@ -17,7 +17,6 @@
 		66BD0D091CE8D1FA006EE870 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66BD0D081CE8D1FA006EE870 /* main.m */; };
 		66BD0D101CE8D211006EE870 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66BD0D0C1CE8D211006EE870 /* LaunchScreen.storyboard */; };
 		66BD0D111CE8D211006EE870 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66BD0D0E1CE8D211006EE870 /* Main.storyboard */; };
-		66BD0D131CE8D26A006EE870 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66BD0D121CE8D26A006EE870 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,7 +129,7 @@
 		668DE6FD1C14F8F500AEA3A2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Code From Above, LLC";
 				TargetAttributes = {
 					668DE7041C14F8F500AEA3A2 = {
@@ -163,7 +162,6 @@
 			files = (
 				66BD0D051CE8D1E9006EE870 /* FragmentShader.fsh in Resources */,
 				66BD0CF21CE8D173006EE870 /* Assets.xcassets in Resources */,
-				66BD0D131CE8D26A006EE870 /* Info.plist in Resources */,
 				66BD0D111CE8D211006EE870 /* Main.storyboard in Resources */,
 				66BD0D101CE8D211006EE870 /* LaunchScreen.storyboard in Resources */,
 				66BD0D061CE8D1E9006EE870 /* VertexShader.vsh in Resources */,

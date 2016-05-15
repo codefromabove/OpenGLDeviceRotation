@@ -75,7 +75,8 @@
          [self setTransitioning:NO];
      }];
 
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];}
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+}
 
 - (void)didReceiveMemoryWarning
 {
