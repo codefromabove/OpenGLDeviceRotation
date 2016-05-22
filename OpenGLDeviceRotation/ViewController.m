@@ -178,7 +178,7 @@
         [self printGLInfo];
     }
 
-#define NAIVE_RENDER         1
+#define NAIVE_RENDER         0
 
 #if NAIVE_RENDER
 
@@ -192,7 +192,7 @@
 
 #else
     
-#define CONSTANT_SIZE_RENDER 1
+#define CONSTANT_SIZE_RENDER 0
 
     if ([self isTransitioning]) {
 #if CONSTANT_SIZE_RENDER
@@ -223,6 +223,8 @@
         // Just use the presentation layer size for the projection matrix.
         // Size of the rendered square will change during the orientation
         // change.
+        CGSize  presentationLayerBoundsSize = [[[[self view] layer] presentationLayer] bounds].size;
+        CGFloat presentationLayerRatio      = presentationLayerBoundsSize.width / presentationLayerBoundsSize.height;
         ratio = presentationLayerRatio;
         if (ratio <= 1) {
             projectionMatrix = GLKMatrix4MakeOrtho(-1, 1, -1 / ratio, 1 / ratio, 0, 100);

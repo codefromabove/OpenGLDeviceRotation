@@ -76,8 +76,8 @@
 				66BD0CF61CE8D1C3006EE870 /* GLView.m */,
 				66BD0CF71CE8D1C3006EE870 /* ViewController.h */,
 				66BD0CF81CE8D1C3006EE870 /* ViewController.m */,
-				66BD0CF11CE8D173006EE870 /* Assets.xcassets */,
 				66BD0D0C1CE8D211006EE870 /* LaunchScreen.storyboard */,
+				66BD0CF11CE8D173006EE870 /* Assets.xcassets */,
 				66BD0D0E1CE8D211006EE870 /* Main.storyboard */,
 				668DE7081C14F8F500AEA3A2 /* Supporting Files */,
 			);
