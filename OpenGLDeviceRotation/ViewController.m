@@ -24,12 +24,20 @@
 
 @end
 
+#define DEBUG_OUTPUT 1
+
 
 @implementation ViewController
+
+#pragma mark - ViewController Lifetime
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+#if DEBUG_OUTPUT
+    printf("viewDidLoad\n\n");
+#endif
 
     // Create a context
     EAGLContext *context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
@@ -41,14 +49,15 @@
     [self setupDisplayLink];
 }
 
-- (void) viewWillLayoutSubviews
+- (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
 
-    printf("\n");
+#if DEBUG_OUTPUT
     printf("viewWillLayoutSubviews()\n");
     printf("  Before:\n");
     [self printGLInfo];
+#endif
 
     // Delete the old buffer, and create a new one at the current size/orientation
     GLuint renderbuffer = [self renderBuffer];
@@ -61,8 +70,11 @@
 
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, renderbuffer);
 
+#if DEBUG_OUTPUT
     printf("  After:\n");
     [self printGLInfo];
+    printf("\n");
+#endif
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size
@@ -70,17 +82,21 @@
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 
-    printf("\n");
+#if DEBUG_OUTPUT
     printf("viewWillTransitionToSize:([%.2f, %.2f])\n", size.width, size.height);
     [self printGLInfo];
+    printf("\n");
+#endif
 
     [self setTransitioning:YES];
     [self setTransitionFrame:0];
     [coordinator animateAlongsideTransition:nil
                                  completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-                                     printf("\n");
+#if DEBUG_OUTPUT
                                      printf("viewWillTransitionToSize completion\n");
                                      [self printGLInfo];
+                                     printf("\n");
+#endif
                                      [self setTransitioning:NO];
                                  }];
 }
@@ -89,6 +105,9 @@
 {
     [super didReceiveMemoryWarning];
 }
+
+#pragma mark - OpenGL Setup
+
 
 - (void)createBuffers
 {
@@ -170,62 +189,68 @@
 
     // Compute the projection matrix
     GLKMatrix4 projectionMatrix;
-    GLfloat   ratio = [glView bounds].size.width/[glView bounds].size.height;
+    GLfloat    ratio = [glView bounds].size.width/[glView bounds].size.height;
 
+#if DEBUG_OUTPUT
+    static CFTimeInterval startTime;
     if ([self isTransitioning]) {
-        printf("\nrender %d :\n", (int)[self transitionFrame]);
+        CFTimeInterval current;
+        if ([self transitionFrame] == 0) {
+            printf("\n\n");
+            startTime = [displayLink timestamp];
+            current = 0;
+        }
+        else {
+            current = [displayLink timestamp] - startTime;
+        }
+        printf("render %d (%.2f) :\n", (int)[self transitionFrame], current);
         [self setTransitionFrame:[self transitionFrame] + 1];
         [self printGLInfo];
+        printf("\n");
     }
+#endif
 
-#define NAIVE_RENDER         0
+#define NAIVE_RENDER 0
 
 #if NAIVE_RENDER
 
     // Set the projection to match the dimensions of the GL view.
     if (ratio <= 1) {
-        projectionMatrix = GLKMatrix4MakeOrtho(-1, 1, -1/ratio, 1/ratio, 0, 100);
+        projectionMatrix = GLKMatrix4MakeOrtho(-1, 1, -1 / ratio, 1 / ratio, 0, 100);
     }
     else {
-        projectionMatrix = GLKMatrix4MakeOrtho(-1*ratio, 1*ratio, -1, 1, 0, 100);
+        projectionMatrix = GLKMatrix4MakeOrtho(-1 * ratio, 1 * ratio, -1, 1, 0, 100);
     }
 
 #else
     
-#define CONSTANT_SIZE_RENDER 0
+#define CONSTANT_SIZE_RENDER 1
 
     if ([self isTransitioning]) {
 #if CONSTANT_SIZE_RENDER
+        // Set the projection to match the dimensions of the GL view.
+        if (ratio <= 1) {
+            projectionMatrix = GLKMatrix4MakeOrtho(-1, 1, -1/ratio, 1/ratio, 0, 100);
+        }
+        else {
+            projectionMatrix = GLKMatrix4MakeOrtho(-1*ratio, 1*ratio, -1, 1, 0, 100);
+        }
 
         // Adjust the projection matrix to keep a constant size of displayed
         // square.
-        CGSize  presentationLayerBoundsSize = [[[[self view] layer] presentationLayer] bounds].size;
-        GLfloat widthRatio                  = presentationLayerBoundsSize.width  / [glView bounds].size.width;
-        GLfloat heightRatio                 = presentationLayerBoundsSize.height / [glView bounds].size.height;
+        CGSize     presentationLayerBoundsSize = [[[[self view] layer] presentationLayer] bounds].size;
+        GLfloat    widthRatio                  = [glView bounds].size.width  / presentationLayerBoundsSize.width;
+        GLfloat    heightRatio                 = [glView bounds].size.height / presentationLayerBoundsSize.height;
+        GLKMatrix4 scaleMatrix                 = GLKMatrix4MakeScale(widthRatio, heightRatio, 1);
 
-        if (ratio <= 1) {
-            projectionMatrix = GLKMatrix4MakeOrtho(-1 * widthRatio,
-                                                    1 * widthRatio,
-                                                   -1 / ratio * heightRatio,
-                                                    1 / ratio * heightRatio,
-                                                    0, 100);
-        }
-        else {
-            projectionMatrix = GLKMatrix4MakeOrtho(-1 * ratio * widthRatio,
-                                                    1 * ratio * widthRatio,
-                                                   -1 * heightRatio,
-                                                    1 * heightRatio,
-                                                    0, 100);
-        }
-
+        projectionMatrix = GLKMatrix4Multiply(projectionMatrix, scaleMatrix);
 #else
-
         // Just use the presentation layer size for the projection matrix.
         // Size of the rendered square will change during the orientation
         // change.
         CGSize  presentationLayerBoundsSize = [[[[self view] layer] presentationLayer] bounds].size;
         CGFloat presentationLayerRatio      = presentationLayerBoundsSize.width / presentationLayerBoundsSize.height;
-        ratio = presentationLayerRatio;
+        GLfloat ratio                       = presentationLayerRatio;
         if (ratio <= 1) {
             projectionMatrix = GLKMatrix4MakeOrtho(-1, 1, -1 / ratio, 1 / ratio, 0, 100);
         }
@@ -284,6 +309,8 @@
 //    }
 }
 
+#pragma mark - Debug Methods
+
 - (void)printGLInfo
 {
     CGSize viewBoundsSize              = [[self view] bounds].size;
@@ -313,15 +340,17 @@
 
     UIGraphicsBeginImageContextWithOptions(size, NO, [[UIScreen mainScreen] scale]);
 
-    CGRect rec = CGRectMake(0, 0,
-                            [[self view] bounds].size.width,
-                            [[self view] bounds].size.height);
-    [[self view] drawViewHierarchyInRect:rec afterScreenUpdates:YES];
+    CGRect rect = CGRectMake(0, 0,
+                             [[self view] bounds].size.width,
+                             [[self view] bounds].size.height);
+    [[self view] drawViewHierarchyInRect:rect afterScreenUpdates:YES];
 
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 
-    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    });
 
     return image;
 }
