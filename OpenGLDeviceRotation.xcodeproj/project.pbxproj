@@ -7,18 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		667626651FF8304D0021D522 /* AppDelegate.h in Sources */ = {isa = PBXBuildFile; fileRef = 667626561FF8304D0021D522 /* AppDelegate.h */; };
 		667626661FF8304D0021D522 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 667626571FF8304D0021D522 /* AppDelegate.m */; };
 		667626671FF8304D0021D522 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 667626581FF8304D0021D522 /* Assets.xcassets */; };
 		667626681FF8304D0021D522 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 667626591FF8304D0021D522 /* LaunchScreen.storyboard */; };
 		667626691FF8304D0021D522 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6676265B1FF8304D0021D522 /* Main.storyboard */; };
 		6676266A1FF8304D0021D522 /* FragmentShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 6676265D1FF8304D0021D522 /* FragmentShader.fsh */; };
-		6676266B1FF8304D0021D522 /* GLView.h in Sources */ = {isa = PBXBuildFile; fileRef = 6676265E1FF8304D0021D522 /* GLView.h */; };
 		6676266C1FF8304D0021D522 /* GLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6676265F1FF8304D0021D522 /* GLView.m */; };
-		6676266D1FF8304D0021D522 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 667626601FF8304D0021D522 /* Info.plist */; };
 		6676266E1FF8304D0021D522 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 667626611FF8304D0021D522 /* main.m */; };
 		6676266F1FF8304D0021D522 /* VertexShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 667626621FF8304D0021D522 /* VertexShader.vsh */; };
-		667626701FF8304D0021D522 /* ViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 667626631FF8304D0021D522 /* ViewController.h */; };
 		667626711FF8304D0021D522 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 667626641FF8304D0021D522 /* ViewController.m */; };
 		668DE7281C15077700AEA3A2 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 668DE7271C15077700AEA3A2 /* GLKit.framework */; };
 /* End PBXBuildFile section */
@@ -148,11 +144,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				667626691FF8304D0021D522 /* Main.storyboard in Resources */,
-				6676266A1FF8304D0021D522 /* FragmentShader.fsh in Resources */,
-				667626681FF8304D0021D522 /* LaunchScreen.storyboard in Resources */,
 				667626671FF8304D0021D522 /* Assets.xcassets in Resources */,
-				6676266D1FF8304D0021D522 /* Info.plist in Resources */,
+				667626691FF8304D0021D522 /* Main.storyboard in Resources */,
+				667626681FF8304D0021D522 /* LaunchScreen.storyboard in Resources */,
+				6676266A1FF8304D0021D522 /* FragmentShader.fsh in Resources */,
 				6676266F1FF8304D0021D522 /* VertexShader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,13 +159,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6676266C1FF8304D0021D522 /* GLView.m in Sources */,
 				667626661FF8304D0021D522 /* AppDelegate.m in Sources */,
-				667626711FF8304D0021D522 /* ViewController.m in Sources */,
-				667626651FF8304D0021D522 /* AppDelegate.h in Sources */,
+				6676266C1FF8304D0021D522 /* GLView.m in Sources */,
 				6676266E1FF8304D0021D522 /* main.m in Sources */,
-				6676266B1FF8304D0021D522 /* GLView.h in Sources */,
-				667626701FF8304D0021D522 /* ViewController.h in Sources */,
+				667626711FF8304D0021D522 /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
