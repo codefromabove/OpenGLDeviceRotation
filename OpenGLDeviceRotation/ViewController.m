@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "GLView.h"
-#import <OpenGLES/ES2/gl.h>
+#import <OpenGLES/ES3/gl.h>
 #import <GLKit/GLKEffects.h>
 
 @interface ViewController ()
@@ -24,7 +24,7 @@
 
 @end
 
-#define DEBUG_OUTPUT 1
+#define DEBUG_OUTPUT 0
 
 
 @implementation ViewController
