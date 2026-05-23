@@ -17,6 +17,7 @@
 		6676266F1FF8304D0021D522 /* VertexShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 667626621FF8304D0021D522 /* VertexShader.vsh */; };
 		667626711FF8304D0021D522 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 667626641FF8304D0021D522 /* ViewController.m */; };
 		668DE7281C15077700AEA3A2 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 668DE7271C15077700AEA3A2 /* GLKit.framework */; };
+		66AEE0812FC217D100FD4897 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66AEE0802FC217D100FD4897 /* SceneDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		667626641FF8304D0021D522 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		668DE7051C14F8F500AEA3A2 /* OpenGLDeviceRotation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenGLDeviceRotation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		668DE7271C15077700AEA3A2 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		66AEE07F2FC217D000FD4897 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		66AEE0802FC217D100FD4897 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +68,8 @@
 				667626621FF8304D0021D522 /* VertexShader.vsh */,
 				667626631FF8304D0021D522 /* ViewController.h */,
 				667626641FF8304D0021D522 /* ViewController.m */,
+				66AEE07F2FC217D000FD4897 /* SceneDelegate.h */,
+				66AEE0802FC217D100FD4897 /* SceneDelegate.m */,
 			);
 			path = OpenGLDeviceRotation;
 			sourceTree = "<group>";
@@ -161,6 +166,7 @@
 			files = (
 				667626661FF8304D0021D522 /* AppDelegate.m in Sources */,
 				6676266C1FF8304D0021D522 /* GLView.m in Sources */,
+				66AEE0812FC217D100FD4897 /* SceneDelegate.m in Sources */,
 				6676266E1FF8304D0021D522 /* main.m in Sources */,
 				667626711FF8304D0021D522 /* ViewController.m in Sources */,
 			);
